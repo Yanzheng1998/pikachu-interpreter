@@ -10,49 +10,55 @@ public class Pikachu{
 	File input;
 	Scanner fileScan;
 	int lineNum;
-	String last;
-	String lastLast;
 
 	public Pikachu(String filename) throws FileNotFoundException{
 		pi = new Stack<Integer>();
 		pika = new Stack<Integer>();
 		input = new File(filename);
 		lineNum = 0;
-		last = "";
-		lastLast = "";
 	} //Pikachu()
 
-	public void run() throws FileNotFoundException{
+	public String run() throws FileNotFoundException{
 		int go = 1; //start program at line 1
+		StringBuilder builder = new StringBuilder();
+		String last;
+		String lastLast;
 		while (go > 0){
 			fileScan = new Scanner(input);
 			lineNum = 0;
 			for (int i = 1; i < go; i++){ //go to line "go"
-				// System.out.println("daboog go is " + go);
 				fileScan.nextLine();
 				lineNum++;
 			}
 			go = 0; //if we get to end of while loop without setting "go" to a value greater than 0, exit while loop.
 			while (fileScan.hasNext()){
+				last = "";
+				lastLast = "";
 				lineNum++;
 				Scanner lineScan = new Scanner(fileScan.nextLine());
 				ArrayList<String> thisLine = new ArrayList<String>();
 				while (lineScan.hasNext()){
 					String next = lineScan.next();
-					// if (lastLast.equals(last) && next.equals(last)){
-					// 	System.err.println("Error: Three of the same term in a row found on line " + lineNum);
-					// } else{
-					// 	lastLast = last;
-					// 	last = next;
-					// }
-					// System.out.println("daboog Next is " + next);
+					if (lastLast.equals(last) && next.equals(last)){
+						System.err.println("Error: Three of the same term in a row found on line " + lineNum);
+						System.exit(0);
+					} else{
+					 	lastLast = last;
+						last = next;
+					}
 					thisLine.add(next);
 				}
-				// System.out.println("daboog line num is " + lineNum);
+				if (thisLine.size() > 0){
+					if (thisLine.get(0).length() > 2){
+						if (thisLine.get(0).charAt(0) == 47 && thisLine.get(0).charAt(1) == 47){
+							continue;
+						}
+					}
+				}
 				if (thisLine.size() < 2){
 					System.err.println("Error: Line " + lineNum + " found with less than 2 terms.");
+					System.exit(0);
 				} else if (thisLine.size() == 2){
-					// System.out.println("daboog 0 is " + thisLine.get(0) + " 1 is " + thisLine.get(1));
 					switch (thisLine.get(0)){
 						case "pi":
 							switch (thisLine.get(1)){
@@ -220,9 +226,9 @@ public class Pikachu{
 										break;
 									case "pikachu":
 										if (thisLine.get(2).equals("pi")){
-											System.out.print(pi.pop());
+											builder.append(pi.pop());
 										} else{
-											System.out.print(pika.pop());
+											builder.append(pika.pop());
 										}
 										break;
 								}
@@ -231,11 +237,14 @@ public class Pikachu{
 								switch(thisLine.get(1)){
 									case "pi":
 										if (thisLine.get(2).equals("pi")){
-										if (pi.size() < 2){
-											System.err.println("Error: Line " + lineNum + ", there are less than 2 elements in pi pikachu");
-											System.exit(0);
-										}
+											if (pi.size() < 2){
+												System.err.println("Error: Line " + lineNum + ", there are less than 2 elements in pi pikachu");
+												System.exit(0);
+											}
 											int temp = pi.pop().intValue();
+											if (pi.peek().intValue() == 0){
+												System.err.println("Error: Division by 0 on line " + lineNum);
+											}
 											int quot = temp / pi.peek().intValue();
 											pi.push(new Integer(temp));
 											pi.push(new Integer(quot));
@@ -245,6 +254,9 @@ public class Pikachu{
 												System.exit(0);
 											}
 											int temp = pika.pop().intValue();
+											if (pika.peek().intValue() == 0){
+												System.err.println("Error: Division by 0 on line " + lineNum);
+											}
 											int quot = temp / pika.peek().intValue();
 											pika.push(new Integer(temp));
 											pika.push(new Integer(quot));
@@ -255,11 +267,9 @@ public class Pikachu{
 										break;
 									case "pikachu":
 										if (thisLine.get(2).equals("pi")){
-											char print = (char)pi.pop().intValue();
-											System.out.print(print);
+											builder.append((char)pi.pop().intValue());
 										} else{
-											char print = (char)pika.pop().intValue();
-											System.out.print(print);
+											builder.append((char)pika.pop().intValue());
 										}
 										break;
 								}
@@ -285,7 +295,7 @@ public class Pikachu{
 				} //else
 			} //while (pikachu.fileScan.hasNext())
 		} //while (go > 0)
-		System.out.println();
+		return builder.toString();
 	} //run()
 
 	public void fourTermsPushTwo(String third){
@@ -322,8 +332,10 @@ public class Pikachu{
 		}
 	}
 
-	public void pushPi(int number){
-		pi.push(new Integer(number));
+	public void pushInputs(ArrayList<Integer> inputs){
+		for (Integer input : inputs){
+			pi.push(input);
+		}
 	}
 
 	public ArrayList<String> debugVomitPikachus(){
