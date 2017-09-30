@@ -1,8 +1,0 @@
-This is an interpreter for the Pikachu Programming Language. The syntax rules for the language can be found in syntax.txt.
-
-To run the interpreter, execute the following commands.
-
-javac *.java
-java Driver
-
-Follow the instructions to enter the pikachu file and the inputs you want to use, or to run the tests.
