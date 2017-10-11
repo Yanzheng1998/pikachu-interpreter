@@ -1,4 +1,4 @@
-This is an interpreter for the Pikachu Programming Language.
+This is an interpreter for the Pikachu Programming Language. It was made because the original interpreter (and syntax rules) were unable to distinguish between subtraction and division.
 
 The site where I found this language is: http://trove42.com/introducing-pikachu-programming-language/
 The syntax rules for the language can be found in syntax.txt.
