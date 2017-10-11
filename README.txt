@@ -13,3 +13,8 @@ Follow the instructions to enter the pikachu file and the inputs you want to use
 ---
 
 Syntax.txt contains information about how to create a program in the Pikachu language
+
+---
+
+Known Bugs:
+Copying the fibonacci program from the website and running it with the interpreter does not work
