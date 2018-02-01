@@ -123,7 +123,7 @@ public class Test{
 			test += (string + " ");
 			System.out.println(string);
 		}
-		if (test.equals("Pi Pikachu contains: 1 2 1 Pika Pikachu contains: 3 5 2 ")){
+		if (test.equals("Pi Pikachu contains: 1 1 2 Pika Pikachu contains: 3 5 2 ")){
 			return true;
 		} else{
 			return false;

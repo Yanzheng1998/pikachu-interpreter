@@ -24,6 +24,7 @@ public class Pikachu{
 		String last;
 		String lastLast;
 		while (go > 0){
+			if (fileScan != null) fileScan.close(); //goto implementation will crush if too many files are open!
 			fileScan = new Scanner(input);
 			lineNum = 0;
 			for (int i = 1; i < go; i++){ //go to line "go"
@@ -93,6 +94,7 @@ public class Pikachu{
 												go++;
 											} //while (counter.hasNext())
 										} else{
+											System.err.println("Hit jne --> condition skips");
 											fileScan.nextLine();
 											lineNum++;
 										}
@@ -202,12 +204,12 @@ public class Pikachu{
 								switch(thisLine.get(1)){
 									case "pi":
 										if (thisLine.get(2).equals("pi")){
-										if (pi.size() < 2){
-											System.err.println("Error: Line " + lineNum + ", there are less than 2 elements in pi pikachu");
-											System.exit(0);
-										}
+											if (pi.size() < 2){
+												System.err.println("Error: Line " + lineNum + ", there are less than 2 elements in pi pikachu");
+												System.exit(0);
+											}
 											int temp = pi.pop().intValue();
-											int diff = temp - pi.peek().intValue();
+											int diff = pi.peek().intValue() - temp;
 											pi.push(new Integer(temp));
 											pi.push(new Integer(diff));
 										} else if (thisLine.get(2).equals("pika")){
