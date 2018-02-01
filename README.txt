@@ -17,4 +17,4 @@ Syntax.txt contains information about how to create a program in the Pikachu lan
 ---
 
 Known Bugs:
-Copying the fibonacci program from the website and running it with the interpreter does not work
+(none)
