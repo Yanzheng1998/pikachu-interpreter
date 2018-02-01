@@ -155,7 +155,7 @@ public class Test{
 			test += (string + " ");
 			System.out.println(string);
 		}
-		if (test.equals("Pi Pikachu contains: 3 9 3 1 1 1 Pika Pikachu contains: 2 2 1 ")){
+		if (test.equals("Pi Pikachu contains: 3 3 9 1 1 1 Pika Pikachu contains: 2 2 1 ")){
 			return true;
 		} else{
 			return false;
