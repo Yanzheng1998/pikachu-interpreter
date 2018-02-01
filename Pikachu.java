@@ -247,7 +247,7 @@ public class Pikachu{
 											if (pi.peek().intValue() == 0){
 												System.err.println("Error: Division by 0 on line " + lineNum);
 											}
-											int quot = temp / pi.peek().intValue();
+											int quot = pi.peek().intValue() / temp;
 											pi.push(new Integer(temp));
 											pi.push(new Integer(quot));
 										} else if (thisLine.get(2).equals("pika")){
